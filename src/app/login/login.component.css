@@ -1,0 +1,17 @@
+.center2 {
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .center1 {
+    text-align: center;
+    
+  }
+
+  .configdiv {border: 1px solid #DDDDDD;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 20px;
+  }
+
