@@ -1,5 +1,5 @@
 export class Usuario{
     
-    nome: string;
-    password: string;
+    cpf: number;
+    senha: number;
 }
