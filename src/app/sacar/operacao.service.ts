@@ -1,17 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
+import { urlSacar, urlSaldo } from '../app.api';
 import { HttpClient } from '@angular/common/http';
-import { from, Observable, BehaviorSubject } from 'rxjs';
-import { urlApiLogin, urlApi } from '../app.api';
-import { LoginComponent } from './login.component';
-import { cp } from '@angular/core/src/render3';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Cliente } from '../login/Cliente';
 import { map, catchError } from 'rxjs/operators';
-import { Cliente } from './Cliente';
-
-
 
 @Injectable()
 export class AuthService {
+
 
   private dataSource = new BehaviorSubject<Cliente>(null);
 
@@ -19,11 +15,21 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  FazerLogin(cpf: number, senha :number): Observable<any>{
 
-     return this.http.get(`${urlApiLogin}?cpf=${cpf}&senha=${senha}`)
+
+    Saldo(cpf: number): Observable<any>{
+
+     return this.http.get(`${urlSaldo}?cpf=${cpf}}`)
      .pipe(map((response) => response))
      .pipe(catchError((error) => error));
     }
-  }
 
+    Sacar(){
+
+    }
+
+    Depositar(){
+
+    }
+  
+}

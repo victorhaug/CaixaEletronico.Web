@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-sacar',
@@ -7,9 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SacarComponent implements OnInit {
 
-  constructor() { }
+  @Input()
+  operacao: FormGroup;
+
+  constructor(
+    private formBuilder: FormBuilder
+
+  ) { }
 
   ngOnInit() {
-  }
+    this.operacao = this.formBuilder.group({
+      inputSacar: new FormControl(""),
+      inputSaldo: new FormControl(""),
+      inputDepositar: new FormControl("")
+    })
 
+    
+  }
+      Sacar(){
+
+        let cpf:number = Number(this.operacao.get("inputSaldo").value);
+
+   
+
+
+  }
 }
+
+
