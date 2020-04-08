@@ -1,20 +1,31 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './login/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SacarComponent } from './sacar/sacar.component';
 import { routing } from './app.routing';
 import { HttpClientModule } from '@angular/common/http';
-import { MatSliderModule } from '@angular/material/slider';
+import {MatRadioModule, MatCardModule} from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
+import { SacarComponent } from './page/sacar/sacar.component';
+import { SaldoComponent } from './page/saldo/saldo.component';
+import { DepositarComponent } from './page/depositar/depositar.component';
+import { OperacaoComponent } from './operacao/operacao.component';
+import { OperacaoService } from './service/operacao.service';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     SacarComponent,
+    SaldoComponent,
+    DepositarComponent,
+    OperacaoComponent,
+    
 
   ],
   imports: [
@@ -22,15 +33,16 @@ import { MatSliderModule } from '@angular/material/slider';
     FormsModule,
     HttpClientModule,
     routing,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
-    MatSliderModule
-    
-
-    
+    MatRadioModule,
+    MatDialogModule,
+    MatCardModule
   ],
   providers: 
   [
-    AuthService
+    AuthService,
+    OperacaoService
   ],
   bootstrap: [AppComponent]
 })

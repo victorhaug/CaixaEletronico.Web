@@ -4,12 +4,13 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Cliente } from '../login/Cliente';
 import { map, catchError } from 'rxjs/operators';
+import { SaldoModel } from '../model/Saldo.model';
 
 @Injectable()
-export class AuthService {
+export class OperacaoService {
 
 
-  private dataSource = new BehaviorSubject<Cliente>(null);
+  private dataSource = new BehaviorSubject<SaldoModel>(null);
 
   data = this.dataSource.asObservable();
 
@@ -17,9 +18,8 @@ export class AuthService {
 
 
 
-    Saldo(cpf: number): Observable<any>{
-
-     return this.http.get(`${urlSaldo}?cpf=${cpf}}`)
+    Saldo(model: SaldoModel ): Observable<any>{
+     return this.http.get(`${urlSaldo}?cpf=${model.CpfCli}&saldo=${model.SaldoConta}`)
      .pipe(map((response) => response))
      .pipe(catchError((error) => error));
     }

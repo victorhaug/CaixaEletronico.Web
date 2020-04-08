@@ -4,6 +4,7 @@ import { e } from '@angular/core/src/render3';
 // Caixa eletronico
 export const urlApi = environment.api_caixaeletronico;
 export const urlApiLogin = environment.api_CaixaLogin;
+export const urlDados = environment.api_listadados;
 
 // Operacoes Caixa 
 export const urlSacar = environment.api_operacaoSacar;

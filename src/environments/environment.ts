@@ -4,6 +4,7 @@ export const environment = {
   //Caixa Eletronico 
   api_caixaeletronico: 'https://localhost:44328/api/CaixaEletronico',
   api_CaixaLogin:'https://localhost:44328/api/CaixaEletronico/Login',
+  api_listadados:'https://localhost:44328/api/CaixaEletronico/ListarUsuario',
 
   //Operação Caixa Eletronico 
 
