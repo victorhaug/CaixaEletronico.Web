@@ -42,6 +42,7 @@ export class SacarComponent implements OnInit {
   }
   ListarUsuario() {
     this.operacao = this.data.data;
+    this.data.data = this.MontarArrayNotas(this.data.data.NotasUtilizadas);
 
     }
 
@@ -54,28 +55,29 @@ export class SacarComponent implements OnInit {
     return valorFormatado;
   }
 
+  
+
+  MontarArrayNotas(ArrayNotasDevolvidas: string) {
+    debugger;
+    if (ArrayNotasDevolvidas.length == 7) {
+      this.novoArray = ArrayNotasDevolvidas.split(',')
+      return this.novoArray;
+    }
+    // else if (ArrayNotasDevolvidas.length == 11) {
+    //   this.novoArray = ArrayNotasDevolvidas.substr(1, 9).split(',')
+    //   return this.novoArray;
+    // }
+    // else if (ArrayNotasDevolvidas.length == 10) {
+    //   this.novoArray = ArrayNotasDevolvidas.substr(1, 8).split(',')
+    //   return this.novoArray;
+    // }
+    // else if (ArrayNotasDevolvidas.length == 7) {
+    //   this.novoArray = ArrayNotasDevolvidas.substr(1, 7).split(',');
+    //   return this.novoArray;
+    // }
+    // this.novoArray = ArrayNotasDevolvidas.substr(1, 11).replace(']', '').split(',')
+    // return this.novoArray;
   }
 
-  // MontarArrayNotas(ArrayNotasDevolvidas: string) {
-  //   if (ArrayNotasDevolvidas.length == 12) {
-  //     this.novoArray = ArrayNotasDevolvidas.substr(1, 10).split(',')
-  //     return this.novoArray;
-  //   }
-  //   else if (ArrayNotasDevolvidas.length == 11) {
-  //     this.novoArray = ArrayNotasDevolvidas.substr(1, 9).split(',')
-  //     return this.novoArray;
-  //   }
-  //   else if (ArrayNotasDevolvidas.length == 10) {
-  //     this.novoArray = ArrayNotasDevolvidas.substr(1, 8).split(',')
-  //     return this.novoArray;
-  //   }
-  //   else if (ArrayNotasDevolvidas.length == 9) {
-  //     this.novoArray = ArrayNotasDevolvidas.substr(1, 7).split(',');
-  //     return this.novoArray;
-  //   }
-  //   this.novoArray = ArrayNotasDevolvidas.substr(1, 11).replace(']', '').split(',')
-  //   return this.novoArray;
-  // }
-
-//}
+}
 

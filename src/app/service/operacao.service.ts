@@ -23,6 +23,8 @@ export class OperacaoService {
   }
 
   Sacar(model: SaldoModel, valorSacar: any) {
+    
+    // const teste = { NumeroContaCli: 12345, SaldoConta: 18000, CpfCli: 12345678900};
     return this.http.post(`${urlSacar}?ValorSacar=${valorSacar}`,JSON.stringify(model),
     { headers: this.headers })
   .pipe(map((response) => response))
@@ -31,6 +33,7 @@ export class OperacaoService {
   }
 
   Depositar(modal: SaldoModel, valorDepositar: number) {
+    debugger;
     return this.http.post(`${urlDepositar}?valorDepositar=${valorDepositar}`, JSON.stringify(modal),
       { headers: this.headers })
       .pipe(map((response) => response))

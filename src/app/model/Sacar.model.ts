@@ -6,6 +6,8 @@ export class SacarModel {
   
     ValorSacar : string;
   
-    SaldoAtual : string;
+    SaldoAtual : number;
+
+    NotasUtilizadas : string;
   
   }

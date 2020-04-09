@@ -1,7 +1,7 @@
 export class SaldoModel {
     
-    CpfCli: number;
-    SaldoConta: string;
     NumeroContaCli: number;
+    SaldoConta: number;
+    CpfCli: number;
     // Nomecliente: string;
 }

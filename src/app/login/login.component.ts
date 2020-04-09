@@ -34,9 +34,9 @@ import { SaldoModel } from '../model/Saldo.model';
 
   ListarDados(cpf: number, senha: number) {
     this.authservice.ListarDados(cpf,senha).subscribe((data: any) => {
-      this.SaldoModel.SaldoConta = data.Data.substr(35, 5);
-      this.SaldoModel.CpfCli = data.Data.substr(50, 11);
       this.SaldoModel.NumeroContaCli = data.Data.substr(18, 3);
+      this.SaldoModel.SaldoConta = data.Data.substr(35, 6);
+      this.SaldoModel.CpfCli = data.Data.substr(51, 11);
       this.authservice.updatedDataSelection(this.SaldoModel);
     });
   }
