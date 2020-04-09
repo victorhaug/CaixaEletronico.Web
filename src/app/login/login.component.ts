@@ -34,23 +34,21 @@ import { SaldoModel } from '../model/Saldo.model';
 
   ListarDados(cpf: number, senha: number) {
     this.authservice.ListarDados(cpf,senha).subscribe((data: any) => {
-      this.SaldoModel.SaldoConta = data.data.substr(73, 6);
-      this.SaldoModel.CpfCli = data.data.substr(89, 11);
-      //this.SaldoModel.Nomecliente = data.Data.substr(133, 40);
+      this.SaldoModel.SaldoConta = data.Data.substr(35, 5);
+      this.SaldoModel.CpfCli = data.Data.substr(50, 11);
+      this.SaldoModel.NumeroContaCli = data.Data.substr(18, 3);
       this.authservice.updatedDataSelection(this.SaldoModel);
     });
   }
 
   fazerLogin(){
-
     let cpf:number = Number(this.loginForm.get("inputCpf").value);
     let senha:number = Number(this.loginForm.get("inputSenha").value);
     this.authservice.FazerLogin(cpf, senha).subscribe(async (data: any) => {
-      if (!data.data) {
-        this.error = "Dados Cpf ou senha estão invalido!!";
+      if (!data.Data) {
+        this.error = "Seus dados, Cpf ou senha estão invalido!!";
         return;
       }
-      // this.authservice.updatedDataSelection(this.SaldoModel);
       this.ListarDados(cpf, senha);
       await this.router.navigate(["/operacao"]);
     });

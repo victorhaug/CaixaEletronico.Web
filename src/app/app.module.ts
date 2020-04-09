@@ -7,13 +7,14 @@ import { AuthService } from './login/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { routing } from './app.routing';
 import { HttpClientModule } from '@angular/common/http';
-import {MatRadioModule, MatCardModule} from '@angular/material';
+import {MatRadioModule, MatCardModule, MatFormFieldModule, MatSnackBarModule} from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SacarComponent } from './page/sacar/sacar.component';
 import { SaldoComponent } from './page/saldo/saldo.component';
 import { DepositarComponent } from './page/depositar/depositar.component';
 import { OperacaoComponent } from './operacao/operacao.component';
 import { OperacaoService } from './service/operacao.service';
+import { SacarModel } from './model/Sacar.model';
 
 
 
@@ -26,6 +27,7 @@ import { OperacaoService } from './service/operacao.service';
     DepositarComponent,
     OperacaoComponent,
     
+    
 
   ],
   imports: [
@@ -37,7 +39,10 @@ import { OperacaoService } from './service/operacao.service';
     ReactiveFormsModule,
     MatRadioModule,
     MatDialogModule,
-    MatCardModule
+    MatCardModule,
+    MatFormFieldModule,
+    MatSnackBarModule,
+    
   ],
   providers: 
   [

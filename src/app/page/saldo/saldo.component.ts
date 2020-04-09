@@ -4,10 +4,8 @@ import { SaldoModel } from 'src/app/model/Saldo.model';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { OperacaoService } from 'src/app/service/operacao.service';
 import { AuthService } from 'src/app/login/auth.service';
-import{MAT_DIALOG_DATA, MatDialogRef}from'@angular/material/dialog';
-
-
-
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-saldo',
@@ -23,10 +21,12 @@ export class SaldoComponent implements OnInit {
   dialogConfig: MatDialogConfig;
 
   constructor(
+    public dialogRef: MatDialogRef<SaldoComponent>,
     private formBuilder: FormBuilder,
     private operacaoService: OperacaoService,
     private dialog: MatDialog,
     private authservice: AuthService,
+    private router: Router,
     @Inject(MAT_DIALOG_DATA) public data: any
 
   ) { }
@@ -36,17 +36,10 @@ export class SaldoComponent implements OnInit {
       inputSacar: new FormControl(""),
       inputSaldo: new FormControl(""),
       inputDepositar: new FormControl(""),
-       
+
     })
     this.saldoModel = new SaldoModel()
-
-      // this.dialogConfig = {
-      //   width: '800px',
-      //   height: '350px',
-      //   position: { top: '13%' },
-      //   data: { data: this.saldoModel }
-      // };
-
+    this.SaldoDados();
   }
 
   SaldoDados() {
@@ -61,6 +54,10 @@ export class SaldoComponent implements OnInit {
   Formatar(data: any) {
     let valorFormatado = parseFloat(data.Data).toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+\,)/g, "$1.");
     return valorFormatado;
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 
 }

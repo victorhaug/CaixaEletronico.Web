@@ -1,3 +1,12 @@
-<p>
-  depositar works!
-</p>
+<mat-card>
+  <mat-card-subtitle>
+    <a mat-list-item (click)="close();" id="btnDepositar" class="waves-effect waves-light btn-small "> FECHAR</a>
+    <p class="h4">DEPOSITAR</p> <br>
+    <p class="h6">NOTAS ACEITAS: R$100, R$50, R$20, R$10.</p> <br>
+    <p class="h6">VALOR MÁXIMO PARA DEPÓSITO: R$5.000,00.</p> <br>
+    <p class="h6">VALOR DEPOSITADO: R$ {{operacao.ValorSacar}}. </p>
+
+    <p>DEPOSITO REALIZADO COM SUCESSO</p>
+    
+  </mat-card-subtitle>
+</mat-card>

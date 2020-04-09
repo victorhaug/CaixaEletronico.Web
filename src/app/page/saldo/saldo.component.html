@@ -1,6 +1,8 @@
 <mat-card>
   <mat-card-subtitle>
+    <a mat-list-item (click)="close();" id="btnDepositar" class="waves-effect waves-light btn-small "> FECHAR</a>
     <p> CPF: {{saldoModel.CpfCli}} </p>
+    <p> CONTA: {{saldoModel.NumeroContaCli}} </p>
     <p class="h5"> SALDO EM CONTA: R$: {{saldoModel.SaldoConta}}. </p>
   </mat-card-subtitle>
 </mat-card>
