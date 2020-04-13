@@ -19,6 +19,7 @@ export class SaldoComponent implements OnInit {
   operacao: FormGroup;
   saldoModel: SaldoModel;
   dialogConfig: MatDialogConfig;
+  valorTest: number;
 
   constructor(
     public dialogRef: MatDialogRef<SaldoComponent>,
@@ -47,13 +48,15 @@ export class SaldoComponent implements OnInit {
       this.saldoModel = data;
       this.operacaoService.Saldo(data).subscribe(data => {
         this.saldoModel.SaldoConta = this.Formatar(data);
+        
       });
     });
   }
 
   Formatar(data: any) {
     let valorFormatado = parseFloat(data.Data).toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+\,)/g, "$1.");
-    return valorFormatado;
+    this.valorTest = parseFloat(valorFormatado)
+    return this.valorTest;
   }
 
   close() {

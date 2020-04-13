@@ -13,7 +13,7 @@ import { SacarModel } from 'src/app/model/Sacar.model';
   templateUrl: './sacar.component.html',
   styleUrls: ['./sacar.component.css']
 })
-export class SacarComponent implements OnInit {
+export class  SacarComponent implements OnInit {
 
   @Input()
   novoArray: any;
@@ -21,6 +21,7 @@ export class SacarComponent implements OnInit {
   dialogConfig: MatDialogConfig;
   authservice: AuthService;
   operacao: SacarModel;
+  Validar: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -42,7 +43,14 @@ export class SacarComponent implements OnInit {
   }
   ListarUsuario() {
     this.operacao = this.data.data;
-    this.data.data = this.MontarArrayNotas(this.data.data.NotasUtilizadas);
+    if (this.data.data.Codigo == 500){
+      this.Validar = true
+      
+    }
+    else{
+
+      this.data.data = this.MontarArrayNotas(this.data.data.NotasUtilizadas);
+    }
 
     }
 
@@ -54,29 +62,12 @@ export class SacarComponent implements OnInit {
     let valorFormatado = parseFloat(data).toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+\,)/g, "$1.");
     return valorFormatado;
   }
-
   
-
   MontarArrayNotas(ArrayNotasDevolvidas: string) {
-    debugger;
     if (ArrayNotasDevolvidas.length == 7) {
       this.novoArray = ArrayNotasDevolvidas.split(',')
       return this.novoArray;
     }
-    // else if (ArrayNotasDevolvidas.length == 11) {
-    //   this.novoArray = ArrayNotasDevolvidas.substr(1, 9).split(',')
-    //   return this.novoArray;
-    // }
-    // else if (ArrayNotasDevolvidas.length == 10) {
-    //   this.novoArray = ArrayNotasDevolvidas.substr(1, 8).split(',')
-    //   return this.novoArray;
-    // }
-    // else if (ArrayNotasDevolvidas.length == 7) {
-    //   this.novoArray = ArrayNotasDevolvidas.substr(1, 7).split(',');
-    //   return this.novoArray;
-    // }
-    // this.novoArray = ArrayNotasDevolvidas.substr(1, 11).replace(']', '').split(',')
-    // return this.novoArray;
   }
 
 }

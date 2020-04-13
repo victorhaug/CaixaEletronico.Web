@@ -8,6 +8,7 @@ import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { OperacaoService } from '../service/operacao.service';
 import { SacarComponent } from '../page/sacar/sacar.component';
 import { SacarModel } from '../model/Sacar.model';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-operacao',
@@ -17,25 +18,26 @@ import { SacarModel } from '../model/Sacar.model';
 export class OperacaoComponent implements OnInit {
 
 
-  loginForm : FormGroup;
+  loginForm: FormGroup;
   dialogConfig: MatDialogConfig;
-  
-  
-  
+  diaLogErro: MatDialogConfig
+
+
+
   constructor(
-    private authservice: AuthService,    
+    private authservice: AuthService,
     private formBuilder: FormBuilder,
     private dialog: MatDialog,
     private operacaoService: OperacaoService,
-    ) { }
-   
+  ) { }
+
   saldoModel: SaldoModel;
   operaçaoModel: SacarModel;
 
   ngOnInit() {
 
     this.saldoModel = new SaldoModel(),
-    this.operaçaoModel = new SacarModel();
+      this.operaçaoModel = new SacarModel();
     this.loginForm = this.formBuilder.group({
       inputValor: new FormControl(""),
     });
@@ -44,13 +46,12 @@ export class OperacaoComponent implements OnInit {
       width: '700px',
       height: '550px',
       position: { top: '100%' },
-      data: { data: this.operaçaoModel}
+      data: { data: this.operaçaoModel }
     };
     this.ListarDados();
   }
 
-  Saldo()
-  {
+  Saldo() {
     this.authservice.data.subscribe(data => {
       this.saldoModel = data
     })
@@ -63,15 +64,14 @@ export class OperacaoComponent implements OnInit {
     this.dialog.open(SaldoComponent, dialogConfig);
   }
 
-  Depositar(){
+  Depositar() {
     let inputValor: string = this.loginForm.get('inputValor').value;
-debugger;
-    this.operacaoService.Depositar(this.saldoModel, parseFloat(inputValor)).subscribe((data: any) => 
-    {
+
+    this.operacaoService.Depositar(this.saldoModel, parseFloat(inputValor)).subscribe((data: any) => {
       this.operaçaoModel.CpfCli = this.saldoModel.CpfCli;
       this.operaçaoModel.NumeroContaCli = this.saldoModel.NumeroContaCli
       this.operaçaoModel.SaldoAtual = this.saldoModel.SaldoConta;
-      this.operaçaoModel.ValorSacar =inputValor;
+      this.operaçaoModel.ValorSacar = inputValor;
     });
     const dialogConfig = {
       width: '700px',
@@ -80,36 +80,37 @@ debugger;
       data: { data: this.operaçaoModel }
     };
     this.dialog.open(DepositarComponent, dialogConfig);
-    
+
 
   }
 
-  ListarDados(){
+  ListarDados() {
     this.authservice.data.subscribe(data => {
       this.saldoModel = data;
     });
   }
 
-  Sacar(){
+  Sacar() {
+
     let inputValor = this.loginForm.get('inputValor').value;
-      
     this.operacaoService.Sacar(this.saldoModel, parseFloat(inputValor)).subscribe((data: any) => {
-      
-      this.operaçaoModel.CpfCli = this.saldoModel.CpfCli;
-      this.operaçaoModel.NumeroContaCli = this.saldoModel.NumeroContaCli;
-      this.operaçaoModel.SaldoAtual = this.saldoModel.SaldoConta;
-      this.operaçaoModel.ValorSacar = inputValor;
-      this.operaçaoModel.NotasUtilizadas = data.Data.substr(92,7);
-      this.dialog.open(SacarComponent, this.dialogConfig);
+      if (data.Codigo == 200){
+        
+        this.operaçaoModel.CpfCli = this.saldoModel.CpfCli;
+        this.operaçaoModel.NumeroContaCli = this.saldoModel.NumeroContaCli;
+        this.operaçaoModel.SaldoAtual = this.saldoModel.SaldoConta;
+        this.operaçaoModel.ValorSacar = inputValor;
+        this.operaçaoModel.NotasUtilizadas = data.Data.substr(92, 7)
+        this.dialog.open(SacarComponent, this.dialogConfig);
+      } 
+      else{
+        const diaLogErro = {
+          width: '700px',
+          height: '550px',
+          position: { top: '100%' },
+          data: { data: data }}
+        this.dialog.open(SacarComponent, diaLogErro);
+      }
     });
-
-    // const dialogConfig = {
-    //   width: '700px',
-    //   height: '550px',
-    //   position: { top: '100%' },
-    //   data: { data: this.operaçaoModel, teste: this.operaçaoModel }
-    // };
-    
-  }
-
+  } 
 }
