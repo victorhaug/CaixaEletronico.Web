@@ -6,6 +6,7 @@ import { OperacaoService } from 'src/app/service/operacao.service';
 import { AuthService } from 'src/app/login/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SacarModel } from 'src/app/model/Sacar.model';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -22,6 +23,9 @@ export class  SacarComponent implements OnInit {
   authservice: AuthService;
   operacao: SacarModel;
   Validar: boolean;
+  valorFormatado: string;
+  
+  
 
   constructor(
     private formBuilder: FormBuilder,
@@ -29,6 +33,7 @@ export class  SacarComponent implements OnInit {
     private dialog: MatDialog,
     public dialogRef: MatDialogRef<SacarComponent>,
     private _snackBar: MatSnackBar,
+    private router: Router,
 
     @Inject(MAT_DIALOG_DATA) public data: any
 
@@ -38,11 +43,16 @@ export class  SacarComponent implements OnInit {
    
     
     this.operacao = new SacarModel();
+    this.valorFormatado = "0"
     this.ListarUsuario();
+    
+    
 
   }
   ListarUsuario() {
+    debugger;
     this.operacao = this.data.data;
+    this.FormatarValor(this.operacao.SaldoAtual)
     if (this.data.data.Codigo == 500){
       this.Validar = true
       
@@ -55,12 +65,13 @@ export class  SacarComponent implements OnInit {
     }
 
   close() {
+    this.router.navigate(["/login"]);
     this.dialogRef.close();
   }
   
   FormatarValor(data: any) {
-    let valorFormatado = parseFloat(data).toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+\,)/g, "$1.");
-    return valorFormatado;
+    this.valorFormatado = parseFloat(data).toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+\,)/g, "$1.");
+    return this.valorFormatado;
   }
   
   MontarArrayNotas(ArrayNotasDevolvidas: string) {

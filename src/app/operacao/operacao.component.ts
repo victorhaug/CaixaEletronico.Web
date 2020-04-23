@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../login/auth.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { SaldoComponent } from '../page/saldo/saldo.component';
@@ -9,6 +9,9 @@ import { OperacaoService } from '../service/operacao.service';
 import { SacarComponent } from '../page/sacar/sacar.component';
 import { SacarModel } from '../model/Sacar.model';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { MatMenuTrigger } from '@angular/material';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-operacao',
@@ -16,7 +19,8 @@ import { Message } from '@angular/compiler/src/i18n/i18n_ast';
   styleUrls: ['./operacao.component.css']
 })
 export class OperacaoComponent implements OnInit {
-
+  
+  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
   loginForm: FormGroup;
   dialogConfig: MatDialogConfig;
@@ -27,8 +31,10 @@ export class OperacaoComponent implements OnInit {
   constructor(
     private authservice: AuthService,
     private formBuilder: FormBuilder,
+    private router: Router,
     private dialog: MatDialog,
     private operacaoService: OperacaoService,
+    
   ) { }
 
   saldoModel: SaldoModel;
@@ -50,6 +56,9 @@ export class OperacaoComponent implements OnInit {
     };
     this.ListarDados();
   }
+  someMethod() {
+    this.trigger.openMenu();
+  }
 
   Saldo() {
     this.authservice.data.subscribe(data => {
@@ -64,25 +73,24 @@ export class OperacaoComponent implements OnInit {
     this.dialog.open(SaldoComponent, dialogConfig);
   }
 
-  Depositar() {
-    let inputValor: string = this.loginForm.get('inputValor').value;
+  // Depositar() {
+  //   let inputValor: string = this.loginForm.get('inputValor').value;
 
-    this.operacaoService.Depositar(this.saldoModel, parseFloat(inputValor)).subscribe((data: any) => {
-      this.operaçaoModel.CpfCli = this.saldoModel.CpfCli;
-      this.operaçaoModel.NumeroContaCli = this.saldoModel.NumeroContaCli
-      this.operaçaoModel.SaldoAtual = this.saldoModel.SaldoConta;
-      this.operaçaoModel.ValorSacar = inputValor;
-    });
-    const dialogConfig = {
-      width: '700px',
-      height: '550px',
-      position: { top: '100%' },
-      data: { data: this.operaçaoModel }
-    };
-    this.dialog.open(DepositarComponent, dialogConfig);
-
-
-  }
+  //   this.operacaoService.Depositar(this.saldoModel, parseFloat(inputValor)).subscribe((data: any) => {
+  //     this.operaçaoModel.CpfCli = this.saldoModel.CpfCli;
+  //     this.operaçaoModel.NumeroContaCli = this.saldoModel.NumeroContaCli
+  //     this.operaçaoModel.SaldoAtual = this.saldoModel.SaldoConta;
+  //     this.operaçaoModel.ValorSacar = inputValor;
+  //   });
+  //   const dialogConfig = {
+  //     width: '700px',
+  //     height: '550px',
+  //     position: { top: '100%' },
+  //     data: { data: this.operaçaoModel }
+  //   };
+  //   this.router.navigate(["/depositar"]);
+  //   //this.dialog.open(DepositarComponent, dialogConfig);
+  // }
 
   ListarDados() {
     this.authservice.data.subscribe(data => {
@@ -90,27 +98,28 @@ export class OperacaoComponent implements OnInit {
     });
   }
 
-  Sacar() {
+  // Sacar(inputValor: any) {
 
-    let inputValor = this.loginForm.get('inputValor').value;
-    this.operacaoService.Sacar(this.saldoModel, parseFloat(inputValor)).subscribe((data: any) => {
-      if (data.Codigo == 200){
+  //   //let inputValor = this.loginForm.get('inputValor').value;
+    
+  //   this.operacaoService.Sacar(this.saldoModel, parseFloat(inputValor)).subscribe((data: any) => {
+  //     if (data.Codigo == 200){
         
-        this.operaçaoModel.CpfCli = this.saldoModel.CpfCli;
-        this.operaçaoModel.NumeroContaCli = this.saldoModel.NumeroContaCli;
-        this.operaçaoModel.SaldoAtual = this.saldoModel.SaldoConta;
-        this.operaçaoModel.ValorSacar = inputValor;
-        this.operaçaoModel.NotasUtilizadas = data.Data.substr(92, 7)
-        this.dialog.open(SacarComponent, this.dialogConfig);
-      } 
-      else{
-        const diaLogErro = {
-          width: '700px',
-          height: '550px',
-          position: { top: '100%' },
-          data: { data: data }}
-        this.dialog.open(SacarComponent, diaLogErro);
-      }
-    });
-  } 
+  //       this.operaçaoModel.CpfCli = this.saldoModel.CpfCli;
+  //       this.operaçaoModel.NumeroContaCli = this.saldoModel.NumeroContaCli;
+  //       this.operaçaoModel.SaldoAtual = this.saldoModel.SaldoConta;
+  //       this.operaçaoModel.ValorSacar = inputValor;
+  //       this.operaçaoModel.NotasUtilizadas = data.Data.substr(92, 7)
+  //       this.dialog.open(SacarComponent, this.dialogConfig);
+  //     } 
+  //     else{
+  //       const diaLogErro = {
+  //         width: '700px',
+  //         height: '550px',
+  //         position: { top: '100%' },
+  //         data: { data: data }}
+  //       this.dialog.open(SacarComponent, diaLogErro);
+  //     }
+  //   });
+  // } 
 }

@@ -1,8 +1,25 @@
-<h6 class="center1">Realize sua transação</h6>
+<nav>
+  <div class="nav-wrapper teal lighten-1">
+    <a href="#" class="brand-logo right" >Caixa Eletronico Web</a>
+    <ul id="nav-mobile" class="left hide-on-med-and-down">
+      <li><a routerLink="/sacaraction">Sacar</a></li>
+      <li><a routerLink="/depositaraction">Depositar</a></li>
+      <li><a mat-list-item (click)="Saldo()">Saldo</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="center-align" style="
+padding-top: 200px;
+">
+<h5> BEM VINDO !!</h5>
+<h5> ESCOLHA A OPERÇÃO DESEJADA A CIMA.</h5>
+</div>
+
+<!-- <h6 class="center1">Realize sua transação</h6>
 <form [formGroup]="loginForm">
 <div class="row-3 center1" >
   <div  class="input-field col s6 center1">
-    <input formControlName="inputValor" id="valor" type="number" class="validate center1" style="
+    <input formControlName="inputValor" id="valor" type="number" min="0" class="validate center1" style="
     width: 335px">
     <label class="active center1" for="valor">Valor solicitado</label>
     <h6 >Valor mínimo para sacar: R$10,00 e Valor máximo: R$2.000,00</h6>
@@ -17,5 +34,5 @@
     <a mat-list-item (click)="Saldo();" id="btnDepositar" class="waves-effect waves-light btn-small "> Saldo</a>
   </div>
 </div>
-</form>
+</form> -->
             

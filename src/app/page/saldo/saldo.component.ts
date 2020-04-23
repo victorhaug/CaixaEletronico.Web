@@ -20,6 +20,7 @@ export class SaldoComponent implements OnInit {
   saldoModel: SaldoModel;
   dialogConfig: MatDialogConfig;
   valorTest: number;
+  valorFormatado: string;
 
   constructor(
     public dialogRef: MatDialogRef<SaldoComponent>,
@@ -33,6 +34,7 @@ export class SaldoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+  
     this.operacao = this.formBuilder.group({
       inputSacar: new FormControl(""),
       inputSaldo: new FormControl(""),
@@ -54,9 +56,12 @@ export class SaldoComponent implements OnInit {
   }
 
   Formatar(data: any) {
-    let valorFormatado = parseFloat(data.Data).toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+\,)/g, "$1.");
+    debugger;
+    let valorFormatado = parseFloat(data.Data).toFixed(3).replace('.', ',').replace(/(\d)(?=(\d{3})+\,)/g, "$1.");
     this.valorTest = parseFloat(valorFormatado)
     return this.valorTest;
+    // this.valorFormatado = parseFloat(data.Data).toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+\,)/g, "$1.");
+    // return this.valorFormatado;
   }
 
   close() {

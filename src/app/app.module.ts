@@ -7,7 +7,7 @@ import { AuthService } from './login/auth.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { routing } from './app.routing';
 import { HttpClientModule } from '@angular/common/http';
-import {MatRadioModule, MatCardModule, MatFormFieldModule, MatSnackBarModule} from '@angular/material';
+import {MatRadioModule, MatCardModule, MatFormFieldModule, MatSnackBarModule, MatNativeDateModule} from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SacarComponent } from './page/sacar/sacar.component';
 import { SaldoComponent } from './page/saldo/saldo.component';
@@ -15,6 +15,8 @@ import { DepositarComponent } from './page/depositar/depositar.component';
 import { OperacaoComponent } from './operacao/operacao.component';
 import { OperacaoService } from './service/operacao.service';
 import { SacarModel } from './model/Sacar.model';
+import { SacarActionComponent } from './page/action/sacar-action/sacar-action.component';
+import { DepositarActionComponent } from './page/action/depositar-action/depositar-action.component';
 
 
 
@@ -26,6 +28,8 @@ import { SacarModel } from './model/Sacar.model';
     SaldoComponent,
     DepositarComponent,
     OperacaoComponent,
+    SacarActionComponent,
+    DepositarActionComponent,
     
     
 
@@ -42,6 +46,9 @@ import { SacarModel } from './model/Sacar.model';
     MatCardModule,
     MatFormFieldModule,
     MatSnackBarModule,
+    MatNativeDateModule,  
+    
+    
     
   ],
   providers: 
@@ -49,6 +56,9 @@ import { SacarModel } from './model/Sacar.model';
     AuthService,
     OperacaoService
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [OperacaoComponent],
+  
+  
 })
 export class AppModule { }
