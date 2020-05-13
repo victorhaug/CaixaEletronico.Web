@@ -50,7 +50,6 @@ export class  SacarComponent implements OnInit {
 
   }
   ListarUsuario() {
-    debugger;
     this.operacao = this.data.data;
     this.FormatarValor(this.operacao.SaldoAtual)
     if (this.data.data.Codigo == 500){

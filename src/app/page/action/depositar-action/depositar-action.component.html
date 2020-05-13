@@ -15,11 +15,11 @@ padding-top: 200px;
 <form [formGroup]="loginForm" >
 <div class="row-3 center1" >
   <div  class="input-field col s6 center1">
-    <input formControlName="inputValor" id="valor" type="number" min="0" class="validate center1" style="
+    <input currencyMask formControlName="inputValor" maxlength="11" (keyup)="keyup($event.target.value)" id="valor"  class="validate center1" style="
     width: 335px">
     <label class="active center1" for="valor">Valor depositado</label>
     <h6 >Valor mínimo para depositar: R$10,00 e Valor máximo: R$5.000,00</h6>
-    <a (click)="Depositar()"id="btnDepositar" class="waves-effect waves-light btn-small">Depositar</a>
+    <button type="button" (click)="Depositar()"  [disabled]="review_btn"  class="btn btn-primary btn-lg">Depositar</button>
   </div>
 </div>
 </form>

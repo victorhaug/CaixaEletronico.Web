@@ -3,14 +3,14 @@
  <form [formGroup]="loginForm">
  <div class="col-9" >
     <div class="input-field row s6 center2">
-      <input type="text" maxlength="11" formControlName="inputCpf" class="validate "style="width: 300px;">
+      <input type="text" maxlength="14" formControlName="inputCpf" mask="000.000.000-99" class="validate "style="width: 300px;">
       <label class="active center2" for="usuario">Usuario</label>
     </div>
   </div>
 
   <div  class="col-9 center2" >
     <div class="input-field row s6 center2">
-      <input type="number" min="0" formControlName="inputSenha" type="password" class="validate" 
+      <input type="number" min="0" formControlName="inputSenha" (keypress)="QuantidadeNotas($event.target.value)" type="password" class="validate" 
       style="width: 300px;">
       <label class="active center2" for="password">Senha</label>
     </div>

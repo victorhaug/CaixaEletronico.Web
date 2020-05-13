@@ -17,6 +17,19 @@ import { OperacaoService } from './service/operacao.service';
 import { SacarModel } from './model/Sacar.model';
 import { SacarActionComponent } from './page/action/sacar-action/sacar-action.component';
 import { DepositarActionComponent } from './page/action/depositar-action/depositar-action.component';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { CurrencyMaskConfig, CurrencyMaskModule, CURRENCY_MASK_CONFIG } from 'ng2-currency-mask';
+
+export let options: Partial<IConfig> | (() => Partial<IConfig>);
+export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
+  align: "left",
+  allowNegative: true,
+  decimal: ",",
+  precision: 2,
+  prefix: "R$ ",
+  suffix: "",
+  thousands: "."
+};
 
 
 
@@ -46,7 +59,10 @@ import { DepositarActionComponent } from './page/action/depositar-action/deposit
     MatCardModule,
     MatFormFieldModule,
     MatSnackBarModule,
-    MatNativeDateModule,  
+    MatNativeDateModule,
+    NgxMaskModule.forRoot(options),
+    CurrencyMaskModule
+     
     
     
     
@@ -54,7 +70,8 @@ import { DepositarActionComponent } from './page/action/depositar-action/deposit
   providers: 
   [
     AuthService,
-    OperacaoService
+    OperacaoService,
+    { provide: CURRENCY_MASK_CONFIG, useValue: CustomCurrencyMaskConfig }
   ],
   bootstrap: [AppComponent],
   entryComponents: [OperacaoComponent],

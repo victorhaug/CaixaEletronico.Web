@@ -19,7 +19,9 @@ export class DepositarActionComponent implements OnInit {
   loginForm: FormGroup;
   operaçaoModel: SacarModel;
   dialogConfig: MatDialogConfig;
-  
+  review_btn: Boolean;
+
+
   constructor(
     private dialog: MatDialog,
     private authservice: AuthService,
@@ -29,10 +31,11 @@ export class DepositarActionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.operaçaoModel = new SacarModel()
-    this.saldoModel = new SaldoModel(),
+    this.operaçaoModel = new SacarModel(),
+      this.saldoModel = new SaldoModel(),
+      this.review_btn = new Boolean();
     this.loginForm = this.formBuilder.group({
-      inputValor: new FormControl(""),
+      inputValor: new FormControl(" "),
     });
     this.dialogConfig = {
       width: '700px',
@@ -40,8 +43,9 @@ export class DepositarActionComponent implements OnInit {
       position: { top: '100%' },
       data: { data: this.operaçaoModel }
     };
-    
+
     this.ListarDados()
+    this.review_btn = true;
   }
 
   ListarDados() {
@@ -51,7 +55,6 @@ export class DepositarActionComponent implements OnInit {
   }
 
   Depositar() {
-    debugger;
     let inputValor: string = this.loginForm.get('inputValor').value;
 
     this.operacaoService.Depositar(this.saldoModel, parseFloat(inputValor)).subscribe((data: any) => {
@@ -67,9 +70,19 @@ export class DepositarActionComponent implements OnInit {
       data: { data: this.operaçaoModel }
     };
     //this.router.navigate(["/depositar"]);
-     this.dialog.open(DepositarComponent, dialogConfig);
-
-
+    this.dialog.open(DepositarComponent, dialogConfig);
   }
 
+  keyup(event: any) {
+    let inputValor: string = this.loginForm.get('inputValor').value;
+
+    if (parseFloat(inputValor) < 10 || inputValor.length == 0) {
+
+      this.review_btn = true
+    }
+    else {
+
+      this.review_btn = false
+    }
+  }
 }

@@ -15,12 +15,14 @@ padding-top: 200px;
 <form [formGroup]="loginForm" >
 <div class="row-3 center1" >
   <div  class="input-field col s6 center1">
-    <input formControlName="inputValor" id="valor" type="number" min="0" class="validate center1" style="
+    <input currencyMask formControlName="inputValor" maxlength="11" id="valor" (keyup)="keyup($event.target.value)"  class="validate center1" style="
     width: 335px">
     <label class="active center1" for="valor">Valor solicitado</label>
     <h6 >Valor mínimo para sacar: R$10,00 e Valor máximo: R$2.000,00</h6>
-    <a (click)="Sacar()"id="btnSacar" class="waves-effect waves-light btn-small">Sacar</a>
+    <button type="button" (click)="Sacar()" [disabled]="review_btn"  class="btn btn-primary btn-lg">Sacar</button>
   </div>
 </div>
-</form>
-</div>
+</form> 
+</div>  
+
+

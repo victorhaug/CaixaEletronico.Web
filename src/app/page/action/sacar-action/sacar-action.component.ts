@@ -8,6 +8,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material';
 import { SacarComponent } from '../../sacar/sacar.component';
 import { AuthService } from 'src/app/login/auth.service';
 
+
 @Component({
   selector: 'app-sacar-action',
   templateUrl: './sacar-action.component.html',
@@ -19,6 +20,7 @@ export class SacarActionComponent implements OnInit {
   loginForm: FormGroup;
   dialogConfig: MatDialogConfig;
   operaçaoModel: SacarModel;
+  review_btn: Boolean;
   
   constructor(
     private formBuilder: FormBuilder,
@@ -34,7 +36,7 @@ export class SacarActionComponent implements OnInit {
     this.operaçaoModel = new SacarModel()
     this.saldoModel = new SaldoModel(),
     this.loginForm = this.formBuilder.group({
-      inputValor: new FormControl(""),
+      inputValor: new FormControl(" "),
     });
     this.dialogConfig = {
       width: '700px',
@@ -43,6 +45,8 @@ export class SacarActionComponent implements OnInit {
       data: { data: this.operaçaoModel }
     };
     this.ListarDados();
+
+    this.review_btn = true;
   }
 
   ListarDados() {
@@ -73,5 +77,19 @@ Sacar() {
         this.dialog.open(SacarComponent, diaLogErro);
       }
     });
-  } 
+  }
+  
+  keyup(event: any) {
+    let inputValor: string = this.loginForm.get('inputValor').value;
+
+    if (parseFloat(inputValor) < 10 || inputValor.length == 0) {
+
+      this.review_btn = true
+    }
+    else {
+
+      this.review_btn = false
+    }
+
+  }
 }

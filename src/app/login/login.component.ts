@@ -46,11 +46,17 @@ import { SaldoModel } from '../model/Saldo.model';
     let senha:number = Number(this.loginForm.get("inputSenha").value);
     this.authservice.FazerLogin(cpf, senha).subscribe(async (data: any) => {
       if (!data.Data) {
-        this.error = "Seus dados, Cpf ou senha estão invalido!!";
-        return;
+        return alert("ERRO AO REALIZAR LOGIN, VERIFICAR USUARIO E SENHA");
       }
       this.ListarDados(cpf, senha);
       await this.router.navigate(["/operacao"]);
     });
+  }
+  QuantidadeNotas(notas: string) {
+
+    if (notas.length == 12) {
+      return false;
+    }
+    return true;
   }
 }
